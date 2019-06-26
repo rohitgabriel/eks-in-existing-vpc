@@ -1,0 +1,24 @@
+terraform import aws_vpc.intercity-vpc-network-uat-VPC vpc-4f7b9328
+
+terraform import aws_subnet.intercity-vpc-network-uat-SubnetAPublic subnet-66972501
+terraform import aws_subnet.intercity-vpc-network-uat-SubnetBPublic subnet-c0fc5089
+terraform import aws_subnet.intercity-vpc-network-uat-SubnetAPrivate subnet-11992b76
+terraform import aws_subnet.intercity-vpc-network-uat-SubnetBPrivate subnet-fdfd51b4
+
+
+No security groups or rules to import, terraform will create new ones.
+
+terraform import aws_route_table.intercity-vpc-network-uat-RouteTableAPublic rtb-3c6ef75b
+terraform import aws_route_table.intercity-vpc-network-uat-RouteTableBPublic rtb-ab6cf5cc
+terraform import aws_route_table.intercity-vpc-network-uat-RouteTableAPrivate rtb-976ff6f0
+terraform import aws_route_table.intercity-vpc-network-uat-RouteTableBPrivate rtb-ef6af388
+
+Cannot import route table associations to terraform
+
+terraform import aws_internet_gateway.intercity-vpc-network-uat-internetgw igw-183e857c
+
+
+At this point rename all the new tf resources and test the terraform state:
+terraform plan -- Should result as following:
+No changes. Infrastructure is up-to-date.
+

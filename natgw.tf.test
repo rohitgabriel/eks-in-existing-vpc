@@ -1,0 +1,29 @@
+# nat gw
+resource "aws_eip" "nat" {
+  vpc = true
+  tags                            = {
+          "kubernetes.io/cluster/${local.cluster_name}" = "shared"
+        }
+}
+
+resource "aws_nat_gateway" "nat-gw" {
+  allocation_id = aws_eip.nat.id
+  subnet_id     = aws_subnet.intercity-vpc-network-uat-SubnetAPublic.id
+  depends_on    = [aws_internet_gateway.intercity-vpc-network-uat-internetgw]
+  tags                            = {
+          "kubernetes.io/cluster/${local.cluster_name}" = "shared"
+        }
+}
+
+# VPC setup for NAT
+resource "aws_route_table" "uat-private" {
+  vpc_id = aws_vpc.intercity-vpc-network-uat-VPC.id
+  route {
+    cidr_block     = "0.0.0.0/0"
+    nat_gateway_id = aws_nat_gateway.nat-gw.id
+  }
+
+  tags = {
+    Name = "uat-private-1"
+  }
+}
