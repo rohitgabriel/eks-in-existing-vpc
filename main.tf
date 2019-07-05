@@ -33,6 +33,7 @@ resource "random_string" "suffix" {
 module "eks" {
   source       = "terraform-aws-modules/eks/aws"
   cluster_name = local.cluster_name
+  
   subnets      = [
       # aws_subnet.intercity-vpc-network-uat-SubnetAPrivate.id,
       # aws_subnet.intercity-vpc-network-uat-SubnetBPrivate.id,
@@ -55,6 +56,7 @@ module "eks" {
   worker_groups = [
     {
       name                          = "worker-group-1"
+      ami_id     = "ami-01bfe815f644becc0"
       instance_type                 = var.instance-type
       additional_userdata           = "echo foo bar"
       asg_desired_capacity          = 2
@@ -68,5 +70,7 @@ module "eks" {
     #   asg_desired_capacity          = 1
     # },
   ]
-  
+  #map_roles                            = var.map_roles
+  map_users                            = var.map_users
+  #map_accounts                         = var.map_accounts
 }
