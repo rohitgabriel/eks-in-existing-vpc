@@ -1,11 +1,5 @@
-terraform {
-  backend "remote" {
-    organization = "eit-demo"
-
-    workspaces {
-      name = "intercity-uat-eks"
-    }
-  }
+locals {
+  cluster_name = "pih-uat-${random_string.suffix.result}"
 }
 
 data "aws_availability_zones" "available" {
@@ -16,7 +10,7 @@ locals {
 }
 
 resource "random_string" "suffix" {
-  length  = 4
+  length  = 3
   special = false
 }
 
