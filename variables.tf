@@ -4,7 +4,7 @@ variable "region" {
 
 
 variable "instance-type" {
-  default = "m5.large"
+  default = "m5.xlarge"
 }
 
 # variable "map_accounts" {
