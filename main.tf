@@ -16,7 +16,7 @@ locals {
 }
 
 resource "random_string" "suffix" {
-  length  = 5
+  length  = 4
   special = false
 }
 
@@ -58,7 +58,7 @@ module "eks" {
       name                          = "worker-group-1"
       ami_id     = "ami-01bfe815f644becc0"
       instance_type                 = var.instance-type
-      additional_userdata           = "echo foo bar"
+      additional_userdata           = "uat"
       asg_desired_capacity          = 2
       additional_security_group_ids = [aws_security_group.worker_group_mgmt_one.id]
     },
